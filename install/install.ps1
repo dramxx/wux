@@ -8,16 +8,6 @@ $ErrorActionPreference = "Stop"
 Write-Host "Installing wux..." -ForegroundColor Cyan
 
 $RepoRoot = Split-Path -Parent $PSScriptRoot
-
-Push-Location $RepoRoot
-
-if (-not (Test-Path "target\release\wux.exe")) {
-    Write-Host "Building release binary..." -ForegroundColor Yellow
-    cargo build --release
-}
-
-Pop-Location
-
 $InstallDir = "$env:USERPROFILE\.wux\bin"
 $BinaryPath = "$InstallDir\wux.exe"
 
@@ -25,6 +15,13 @@ if ((Test-Path $BinaryPath) -and -not $Force) {
     Write-Host "wux is already installed. Use -Force to reinstall." -ForegroundColor Yellow
     exit 0
 }
+
+Push-Location $RepoRoot
+
+Write-Host "Building release binary..." -ForegroundColor Yellow
+cargo build --release
+
+Pop-Location
 
 if (-not (Test-Path $InstallDir)) {
     New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null

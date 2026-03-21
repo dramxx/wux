@@ -69,13 +69,13 @@ wux info
 ```
 
 ```
-📁 C:\DEV\wux
-   Size        142.3 MB
-   Files       87
-   Folders     12
-   Largest     target\release\wux.exe     45.2 MB
-   Newest      src\commands\free.rs       2 minutes ago
-   Oldest      Cargo.toml                 3 days ago
+📁 C:\DEV\project
+   Size         1.5 GB
+   Files        4550
+   Folders      592
+   Largest      target\debug\deps\libwindows-f87be79411ac79c9.rlib 140.4 MB
+   Newest       target\release\libwux.d........................... just now
+   Oldest       .git\description.................................. 4 hours ago
 ```
 
 ## Your own commands

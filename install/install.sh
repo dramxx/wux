@@ -16,15 +16,13 @@ PROFILE_UPDATED=0
 
 printf 'Installing wux...\n'
 
-if [[ ! -f "$REPO_ROOT/target/release/wux" ]]; then
-  printf 'Building release binary...\n'
-  cargo build --release --manifest-path "$REPO_ROOT/Cargo.toml"
-fi
-
 if [[ -f "$BINARY_PATH" && "$FORCE" -ne 1 ]]; then
   printf 'wux is already installed. Use --force to reinstall.\n'
   exit 0
 fi
+
+printf 'Building release binary...\n'
+cargo build --release --manifest-path "$REPO_ROOT/Cargo.toml"
 
 mkdir -p "$INSTALL_DIR"
 cp "$REPO_ROOT/target/release/wux" "$BINARY_PATH"
