@@ -62,7 +62,27 @@ description = "Shut down PC"
 safe = false
 ```
 
-From now on, it's just `wux serve` and `wux bye`.
+Or you need to run parallel processes? Simple .bat file comes to the rescue:
+
+```bat
+@echo off
+set PROJECT=%1
+cd /d %PROJECT%
+start "" opencode serve --hostname 127.0.0.1 --port 4096
+timeout /t 2
+start "" cmd /k "cd /d C:/dev/port-hole/server && npx tsx src/index.ts"
+opencode attach http://127.0.0.1:4096
+```
+
+And than in wux
+
+```toml
+[commands.porthole]
+run = ["C:/dev/port-hole/launch.bat C:/dev/myproject"]
+description = "Launch port-hole"
+```
+
+From now on, it's just `wux serve`, `wux bye` or `wux porthole`.
 
 Run `wux list` to see every command available (including yours).
 
