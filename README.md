@@ -62,6 +62,22 @@ wux nuke ./node_modules
 
 wux will ask before deleting. Use `--yes` to skip the prompt.
 
+**Show folder info**
+
+```powershell
+wux info
+```
+
+```
+📁 C:\DEV\wux
+   Size        142.3 MB
+   Files       87
+   Folders     12
+   Largest     target\release\wux.exe     45.2 MB
+   Newest      src\commands\free.rs       2 minutes ago
+   Oldest      Cargo.toml                 3 days ago
+```
+
 ## Your own commands
 
 Got things you run every day? Stop typing them.

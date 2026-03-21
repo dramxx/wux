@@ -47,6 +47,7 @@ fn main() -> anyhow::Result<()> {
             Ok(())
         }
         Some("update") => commands::update::run(),
+        Some("info") => commands::info::run(),
         Some("help") | None => {
             print_help(&cfg);
             Ok(())
@@ -70,6 +71,7 @@ fn print_help(cfg: &config::Config) {
     println!("  nuke <path>    Delete file/directory");
     println!("  config         Open wux.toml");
     println!("  list           List all commands");
+    println!("  info           Show directory info");
     println!("  update         Update wux");
     println!("  help           Show this help\n");
 

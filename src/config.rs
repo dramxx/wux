@@ -92,7 +92,7 @@ fn config_path() -> PathBuf {
 fn is_reserved_name(name: &str) -> bool {
     matches!(
         name,
-        "free" | "nuke" | "config" | "help" | "list" | "update"
+        "free" | "nuke" | "config" | "help" | "list" | "info" | "update"
     )
 }
 
