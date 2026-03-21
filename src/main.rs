@@ -73,10 +73,11 @@ fn print_help(cfg: &config::Config) {
     println!("Commands:");
     println!("  free <port>    Kill process on port");
     println!("  nuke <path>    Delete file/directory");
+    println!("  whereis <file> Find a file anywhere on the filesystem");
+    println!("  info           Show directory info");
+    println!();
     println!("  config         Open wux.toml");
     println!("  list           List all commands");
-    println!("  info           Show directory info");
-    println!("  whereis <file> Find a file anywhere on the filesystem");
     println!("  update         Update wux");
     println!("  help           Show this help\n");
 

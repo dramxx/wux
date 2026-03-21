@@ -11,12 +11,13 @@ pub fn run(cfg: &Config) {
         "nuke <path>",
         "Delete file/directory".dimmed()
     );
+    println!("  {:15} {}", "whereis <file>", "Find a file anywhere".dimmed());
+    println!("  {:15} {}", "info", "Show directory info".dimmed());
+    println!();
     println!("  {:15} {}", "config", "Open wux.toml".dimmed());
     println!("  {:15} {}", "help", "Show this help".dimmed());
     println!("  {:15} {}", "list", "List all commands".dimmed());
     println!("  {:15} {}", "update", "Update wux".dimmed());
-    println!("  {:15} {}", "info", "Show directory info".dimmed());
-    println!("  {:15} {}", "whereis <file>", "Find a file anywhere".dimmed());
 
     if !cfg.commands.custom().is_empty() {
         println!("\nCustom:");
