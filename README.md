@@ -31,15 +31,14 @@ Restart your terminal. Type `wux help`. Done.
 ```powershell
 # The PowerShell way
 Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Process
-
-# The wux way
-wux free 3000
 ```
 
 ```bash
 # The bash way
 kill -9 $(lsof -ti :3000)
+```
 
+```powershell
 # The wux way
 wux free 3000
 ```
@@ -49,15 +48,14 @@ wux free 3000
 ```powershell
 # The PowerShell way
 Remove-Item -Recurse -Force .\node_modules
-
-# The wux way
-wux nuke .\node_modules
 ```
 
 ```bash
 # The bash way
 rm -rf ./node_modules
+```
 
+```powershell
 # The wux way
 wux nuke ./node_modules
 ```
