@@ -11,7 +11,7 @@ pub fn run(path: &str, dry_run: bool, skip_prompt: bool) -> Result<()> {
     if !abs_path.exists() {
         println!(
             "{} Nothing at '{}' — already gone?",
-            "⚠".yellow(),
+            "⚠ ".yellow(),
             path.display()
         );
         return Ok(());

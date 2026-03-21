@@ -35,7 +35,7 @@ pub fn run(port: u16, dry_run: bool, safe: bool) -> Result<()> {
             );
         }
         None => {
-            println!("{} Nothing is running on port {}.", "⚠".yellow(), port);
+            println!("{} Nothing is running on port {}.", "⚠ ".yellow(), port);
         }
     }
 

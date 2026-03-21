@@ -12,7 +12,7 @@ cd wux
 .\install\install.ps1
 ```
 
-Restart your terminal. Type `wux --version`. Done.
+Restart your terminal. Type `wux help`. Done.
 
 ## Commands
 

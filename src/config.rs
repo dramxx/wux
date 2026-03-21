@@ -114,7 +114,7 @@ pub fn load() -> Result<Config> {
         if is_reserved_name(&name) {
             eprintln!(
                 "{} Warning: '{}' is a reserved command name. Skipping.",
-                "⚠".yellow(),
+                "⚠ ".yellow(),
                 name
             );
             continue;
