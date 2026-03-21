@@ -12,8 +12,8 @@ $InstallDir = "$env:USERPROFILE\.wux\bin"
 $BinaryPath = "$InstallDir\wux.exe"
 
 if ((Test-Path $BinaryPath) -and -not $Force) {
-    Write-Host "wux is already installed. Use -Force to reinstall." -ForegroundColor Yellow
-    exit 0
+    Write-Host "wux is already installed. Reinstalling..." -ForegroundColor Yellow
+    $Force = $true
 }
 
 Push-Location $RepoRoot
@@ -25,6 +25,15 @@ Pop-Location
 
 if (-not (Test-Path $InstallDir)) {
     New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
+}
+
+$RunningWux = Get-Process -Name "wux" -ErrorAction SilentlyContinue | Where-Object {
+    $_.Path -and $_.Path -eq $BinaryPath
+}
+if ($RunningWux) {
+    Write-Host "Stopping running wux..." -ForegroundColor Yellow
+    $RunningWux | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Milliseconds 500
 }
 
 Copy-Item "$RepoRoot\target\release\wux.exe" $BinaryPath -Force

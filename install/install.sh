@@ -17,14 +17,22 @@ PROFILE_UPDATED=0
 printf 'Installing wux...\n'
 
 if [[ -f "$BINARY_PATH" && "$FORCE" -ne 1 ]]; then
-  printf 'wux is already installed. Use --force to reinstall.\n'
-  exit 0
+  printf 'wux is already installed. Reinstalling...\n'
+  FORCE=1
 fi
 
 printf 'Building release binary...\n'
 cargo build --release --manifest-path "$REPO_ROOT/Cargo.toml"
 
 mkdir -p "$INSTALL_DIR"
+if command -v pgrep >/dev/null 2>&1; then
+  if pgrep -f "$BINARY_PATH" >/dev/null 2>&1; then
+    printf 'Stopping running wux...\n'
+    pkill -f "$BINARY_PATH" || true
+    sleep 1
+  fi
+fi
+
 cp "$REPO_ROOT/target/release/wux" "$BINARY_PATH"
 chmod +x "$BINARY_PATH"
 printf 'Copied wux to %s\n' "$INSTALL_DIR"
