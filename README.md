@@ -1,0 +1,74 @@
+# wux
+
+Tired of googling PowerShell syntax for the hundredth time? Same.
+
+`wux` (windows user experience) is a personal command toolkit that replaces the stuff you can never remember with commands that actually make sense.
+
+## Install
+
+```powershell
+git clone https://github.com/dramxx/wux.git
+cd wux
+.\install\install.ps1
+```
+
+Restart your terminal. Type `wux --version`. Done.
+
+## Commands
+
+**Kill whatever is sitting on a port**
+
+```powershell
+# The PowerShell way
+Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Process
+
+# The wux way
+wux free 3000
+```
+
+**Delete a folder and everything in it**
+
+```powershell
+# The PowerShell way
+Remove-Item -Recurse -Force .\node_modules
+
+# The wux way
+wux nuke .\node_modules
+```
+
+wux will ask before deleting. Use `--yes` to skip the prompt.
+
+## Your own commands
+
+Got things you run every day? Stop typing them.
+
+```powershell
+wux config
+```
+
+Opens `wux.toml` in Notepad. Close it when done, changes take effect immediately. You can do things like:
+
+```toml
+[commands.serve]
+run = [
+    "cd C:/dev/work/bigproject",
+    "npm run dev"
+]
+description = "Launch Forge"
+
+[commands.bye]
+run = ["shutdown /s /t 0"]
+description = "Shut down PC"
+safe = false
+```
+
+From now on, it's just `wux serve` and `wux bye`.
+
+Run `wux list` to see every command available (including yours).
+
+## Flags
+
+| Flag        | What it does                            |
+| ----------- | --------------------------------------- |
+| `--yes`     | Skip confirmation prompts               |
+| `--dry-run` | Show what would happen without doing it |
