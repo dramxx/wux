@@ -48,6 +48,10 @@ fn main() -> anyhow::Result<()> {
         }
         Some("update") => commands::update::run(),
         Some("info") => commands::info::run(),
+        Some("whereis") => {
+            let file_name = filtered_args.get(2).map(|s| s.as_str()).unwrap_or_default();
+            commands::whereis::run(file_name)
+        }
         Some("help") | None => {
             print_help(&cfg);
             Ok(())
@@ -72,6 +76,7 @@ fn print_help(cfg: &config::Config) {
     println!("  config         Open wux.toml");
     println!("  list           List all commands");
     println!("  info           Show directory info");
+    println!("  whereis <file> Find a file anywhere on the filesystem");
     println!("  update         Update wux");
     println!("  help           Show this help\n");
 

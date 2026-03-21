@@ -16,6 +16,7 @@ pub fn run(cfg: &Config) {
     println!("  {:15} {}", "list", "List all commands".dimmed());
     println!("  {:15} {}", "update", "Update wux".dimmed());
     println!("  {:15} {}", "info", "Show directory info".dimmed());
+    println!("  {:15} {}", "whereis <file>", "Find a file anywhere".dimmed());
 
     if !cfg.commands.custom().is_empty() {
         println!("\nCustom:");

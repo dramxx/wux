@@ -62,20 +62,11 @@ wux nuke ./node_modules
 
 wux will ask before deleting. Use `--yes` to skip the prompt.
 
-**Show folder info**
+**Other built in commands**
 
 ```powershell
-wux info
-```
-
-```
-📁 C:\DEV\project
-   Size         1.5 GB
-   Files        4550
-   Folders      592
-   Largest      target\debug\deps\libwindows-f87be79411ac79c9.rlib 140.4 MB
-   Newest       target\release\libwux.d........................... just now
-   Oldest       .git\description.................................. 4 hours ago
+wux info - lists folder structure and detailed info
+wux whereis <file> - finds a file, wherever it is
 ```
 
 ## Your own commands
