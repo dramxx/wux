@@ -22,10 +22,8 @@ pub fn run(path: &str, dry_run: bool, skip_prompt: bool) -> Result<()> {
         anyhow::bail!("Refusing to nuke your current working directory.");
     }
 
-    if let Some(parent) = abs_path.parent() {
-        if parent == abs_path {
-            anyhow::bail!("Refusing to nuke a filesystem root. That would be bad.");
-        }
+    if abs_path.parent().is_none() {
+        anyhow::bail!("Refusing to nuke a filesystem root. That would be bad.");
     }
 
     let path_str = abs_path.to_string_lossy().to_lowercase();

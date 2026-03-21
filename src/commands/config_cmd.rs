@@ -3,6 +3,7 @@ use anyhow::Result;
 use colored::Colorize;
 use std::fs;
 use std::path::PathBuf;
+use std::process::Command;
 
 pub fn run() -> Result<()> {
     let config_path = get_config_path();
@@ -15,7 +16,7 @@ pub fn run() -> Result<()> {
 
     if !config_path.exists() {
         let default_config = r#"# wux configuration file
-# https://github.com/yourusername/wux
+# https://github.com/dramxx/wux
 
 [settings]
 color = true
@@ -39,10 +40,17 @@ safe = false
     Ok(())
 }
 
+#[cfg(windows)]
 fn open_in_editor(path: &PathBuf) -> Result<()> {
-    std::process::Command::new("notepad.exe")
-        .arg(path)
-        .spawn()?;
+    Command::new("notepad.exe").arg(path).spawn()?;
+
+    Ok(())
+}
+
+#[cfg(unix)]
+fn open_in_editor(path: &PathBuf) -> Result<()> {
+    let editor = std::env::var("EDITOR").unwrap_or_else(|_| "nano".to_string());
+    Command::new(editor).arg(path).spawn()?;
 
     Ok(())
 }

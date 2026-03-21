@@ -49,7 +49,9 @@ fn nuke_dry_run_does_not_delete() {
 
 #[test]
 fn nuke_aborts_on_nonexistent_path() {
-    let result = nuke_path("C:\\nonexistent\\path\\12345");
+    let temp_dir = TempDir::new().unwrap();
+    let missing_path = temp_dir.path().join("missing-path-12345");
+    let result = nuke_path(missing_path.to_str().unwrap());
     if let Err(e) = &result {
         eprintln!("Error: {:?}", e);
     }
@@ -67,6 +69,11 @@ fn nuke_refuses_cwd() {
 
 #[test]
 fn nuke_refuses_root() {
-    let result = nuke_path("C:\\");
+    #[cfg(windows)]
+    let root = "C:\\";
+    #[cfg(unix)]
+    let root = "/";
+
+    let result = nuke_path(root);
     assert!(result.is_err());
 }

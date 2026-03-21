@@ -1,15 +1,25 @@
 # wux
 
-Tired of googling PowerShell syntax for the hundredth time? Same.
+Tired of googling shell syntax for the hundredth time? Same.
 
-`wux` (windows user experience) is a personal command toolkit that replaces the stuff you can never remember with commands that actually make sense.
+`wux` is a personal command toolkit that replaces the stuff you can never remember with commands that actually make sense.
 
 ## Install
+
+### Windows
 
 ```powershell
 git clone https://github.com/dramxx/wux.git
 cd wux
 .\install\install.ps1
+```
+
+### Linux/macOS
+
+```bash
+git clone https://github.com/dramxx/wux.git
+cd wux
+./install/install.sh
 ```
 
 Restart your terminal. Type `wux help`. Done.
@@ -26,6 +36,14 @@ Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Proc
 wux free 3000
 ```
 
+```bash
+# The bash way
+kill -9 $(lsof -ti :3000)
+
+# The wux way
+wux free 3000
+```
+
 **Delete a folder and everything in it**
 
 ```powershell
@@ -34,6 +52,14 @@ Remove-Item -Recurse -Force .\node_modules
 
 # The wux way
 wux nuke .\node_modules
+```
+
+```bash
+# The bash way
+rm -rf ./node_modules
+
+# The wux way
+wux nuke ./node_modules
 ```
 
 wux will ask before deleting. Use `--yes` to skip the prompt.

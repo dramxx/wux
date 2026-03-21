@@ -83,7 +83,8 @@ impl CommandRun {
 }
 
 fn config_path() -> PathBuf {
-    PathBuf::from(std::env::var("APPDATA").unwrap_or_else(|_| ".".to_string()))
+    dirs::config_dir()
+        .unwrap_or_else(|| PathBuf::from("."))
         .join("wux")
         .join("wux.toml")
 }
