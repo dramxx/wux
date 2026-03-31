@@ -1,5 +1,6 @@
 pub mod config_cmd;
 pub mod custom;
+pub mod docker;
 pub mod free;
 pub mod info;
 pub mod list;

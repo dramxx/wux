@@ -52,6 +52,8 @@ fn main() -> anyhow::Result<()> {
             let file_name = filtered_args.get(2).map(|s| s.as_str()).unwrap_or_default();
             commands::whereis::run(file_name)
         }
+        Some("dockersafe") => commands::docker::dockersafe(),
+        Some("dockerrun") => commands::docker::dockerrun(),
         Some("help") | None => {
             print_help(&cfg);
             Ok(())
@@ -75,6 +77,8 @@ fn print_help(cfg: &config::Config) {
     println!("  nuke <path>    Delete file/directory");
     println!("  whereis <file> Find a file anywhere on the filesystem");
     println!("  info           Show directory info");
+    println!("  dockersafe     Spin up a read-only, no-network container");
+    println!("  dockerrun      Spin up a writable, networked container");
     println!();
     println!("  config         Open wux.toml");
     println!("  list           List all commands");

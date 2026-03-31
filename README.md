@@ -62,6 +62,24 @@ wux nuke ./node_modules
 
 wux will ask before deleting. Use `--yes` to skip the prompt.
 
+**Spin up a read-only, isolated container**
+
+```powershell
+# no network, read-only mount
+wux dockersafe
+```
+
+Use this for inspecting suspicious repos safely. The container has no network access and the workspace is mounted read-only.
+
+**Spin up a writable, networked container**
+
+```powershell
+# full network, writable mount
+wux dockerrun
+```
+
+This builds and runs a multi-language sandbox with Node.js, Python, Rust, and Go pre-installed. First run may take a few minutes to build the image.
+
 **Other built in commands**
 
 ```powershell
