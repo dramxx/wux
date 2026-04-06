@@ -50,7 +50,34 @@ fn main() -> anyhow::Result<()> {
         Some("info") => commands::info::run(),
         Some("whereis") => {
             let file_name = filtered_args.get(2).map(|s| s.as_str()).unwrap_or_default();
-            commands::whereis::run(file_name)
+            
+            let mut no_ignore = false;
+            let mut ignore_patterns: Vec<String> = Vec::new();
+            let args_slice: Vec<&str> = filtered_args.iter().map(|s| s.as_str()).collect();
+            let mut i = 3;
+            while i < args_slice.len() {
+                match args_slice[i] {
+                    "--no-ignore" => {
+                        no_ignore = true;
+                    }
+                    "--ignore" => {
+                        if i + 1 < args_slice.len() && !args_slice[i + 1].starts_with('-') {
+                            ignore_patterns.push(args_slice[i + 1].to_string());
+                            i += 1;
+                        }
+                    }
+                    _ => {}
+                }
+                i += 1;
+            }
+
+            let custom_ignores = if ignore_patterns.is_empty() {
+                None
+            } else {
+                Some(ignore_patterns)
+            };
+
+            commands::whereis::run_with_ignores(file_name, custom_ignores, no_ignore)
         }
         Some("dockersafe") => commands::docker::dockersafe(),
         Some("dockerrun") => commands::docker::dockerrun(),

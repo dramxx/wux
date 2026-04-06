@@ -49,8 +49,18 @@ fn open_in_editor(path: &PathBuf) -> Result<()> {
 
 #[cfg(unix)]
 fn open_in_editor(path: &PathBuf) -> Result<()> {
-    let editor = std::env::var("EDITOR").unwrap_or_else(|_| "nano".to_string());
-    Command::new(editor).arg(path).spawn()?;
+    if std::process::Command::new("which")
+        .arg("gedit")
+        .output()
+        .map(|o| o.status.success())
+        .unwrap_or(false)
+    {
+        Command::new("gedit").arg(path).spawn()?;
+    } else if let Ok(editor) = std::env::var("EDITOR") {
+        Command::new(editor).arg(path).spawn()?;
+    } else {
+        Command::new("nano").arg(path).spawn()?;
+    }
 
     Ok(())
 }
